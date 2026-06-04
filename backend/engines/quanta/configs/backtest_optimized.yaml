@@ -1,0 +1,111 @@
+######################################################################
+# Tối ưu hóa Backtest QuantaAlpha (Phiên bản Thực tế)
+# - Khắc phục Score/Label bị bão hòa
+# - Tránh Overfit nhưng đảm bảo độ phân hóa
+######################################################################
+
+random_seed: 42
+
+experiment:
+  name: "backtest_optimized_experiment"
+  recorder: "backtest_optimized_recorder"
+  output_dir: "data/result/stock/backtest_optimized"
+  output_metrics_file: "backtest_metrics.json"
+
+factor_source:
+  type: "alpha158_20"
+  custom:
+    json_files: []
+    quality_filter: null
+    max_factors: null
+    use_llm_for_incompatible: true
+  combined:
+    official_source: "alpha158_20"
+    include_custom: true
+
+data:
+  provider_uri: "~/.qlib/qlib_data/cn_data"
+  region: "cn"
+  market: "csi300"
+  start_time: "2016-01-01"
+  end_time: "2020-09-25"
+
+dataset:
+  # SỬA ĐỔI: Dùng giá Open để khớp với lệnh thực thi tại Open ngày mai
+  label: "Ref($open, -2) / Ref($open, -1) - 1"
+
+  learn_processors:
+    - class: "Fillna"
+      kwargs:
+        fields_group: "feature"
+    - class: "ProcessInf"
+    - class: "DropnaLabel"
+    - class: "CSRankNorm"  # Chỉ giữ Rank cho Feature để xử lý Outlier
+      kwargs:
+        fields_group: "feature"
+    # LOẠI BỎ: CSRankNorm cho Label để mô hình học lợi nhuận thật
+
+  infer_processors:
+    - class: "Fillna"
+      kwargs:
+        fields_group: "feature"
+    - class: "ProcessInf"
+    - class: "CSRankNorm"
+      kwargs:
+        fields_group: "feature"
+
+  segments:
+    train: ["2016-01-01", "2018-12-31"]
+    valid: ["2019-01-01", "2019-12-31"]
+    test:  ["2020-01-01", "2020-09-25"]
+
+model:
+  type: "lgb"
+  params:
+    loss: "mse"
+    learning_rate: 0.05  # Giảm LR để học kỹ hơn
+    max_depth: 6         # Tránh cây quá sâu gây overfit
+    num_leaves: 64       # Số lá cân bằng
+    colsample_bytree: 0.8
+    subsample: 0.8
+    # SỬA ĐỔI: Giảm mạnh điều chuẩn để Score phân hóa tốt hơn
+    lambda_l1: 0.1
+    lambda_l2: 1.0
+    num_threads: 20
+    seed: 42
+    random_state: 42
+    early_stopping_round: 50
+    num_boost_round: 1000
+    min_child_samples: 30 # Giảm để cho phép phân tách các nhóm nhỏ
+
+backtest:
+  strategy:
+    class: "TopkDropoutStrategy"
+    module_path: "qlib.contrib.strategy"
+    kwargs:
+      signal: "<PRED>"
+      topk: 30
+      n_drop: 10
+
+  backtest:
+    start_time: "2020-01-01"
+    end_time: "2020-09-25"
+    account: 100000000
+    benchmark: "SH000300"
+    exchange_kwargs:
+      limit_threshold: 0.095
+      deal_price: "open"
+      open_cost: 0.0005
+      close_cost: 0.0015
+      min_cost: 5
+
+llm:
+  enabled: true
+  timeout: 300
+  max_retries: 3
+
+factor_calculation:
+  output_dir: "data/result/stock/computed_factors"
+  save_intermediate: true
+  n_jobs: 4
+  data_file: null

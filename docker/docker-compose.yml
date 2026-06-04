@@ -1,0 +1,163 @@
+# ============================================
+# DOCKER COMPOSE CHO DỰ ÁN GREY
+# ============================================
+# Grey Backtester - Vectorized Numpy + Fast Mode
+# 3x faster than Vinh with optimized architecture
+# ============================================
+
+name: grey
+
+services:
+  # ============================================
+  # SERVICE 1: MongoDB Database
+  # ============================================
+  mongodb:
+    image: mongo:6.0
+    container_name: grey-mongodb
+    restart: unless-stopped
+    ports:
+      # Use port 27020 to avoid conflict with other local MongoDB instances
+      - "27020:27017"
+    environment:
+      MONGO_INITDB_DATABASE: vinh
+    # Resource limits (server has 2 projects; cap Grey to 4 cores / 7GB total)
+    cpuset: "0-3"
+    cpus: "0.5"
+    mem_limit: "1500m"
+    mem_reservation: "512m"
+    deploy:
+      resources:
+        limits:
+          memory: 1500M
+          cpus: '0.5'
+        reservations:
+          memory: 512M
+          cpus: '0.25'
+    volumes:
+      # Mount MongoDB data to host for persistence
+      - /data/grey/mongodb_data:/data/db
+      # MongoDB initialization script
+      - ./mongodb.init.js:/docker-entrypoint-initdb.d/init.js:ro
+    networks:
+      - grey-network
+    healthcheck:
+      test: ["CMD", "mongosh", "--eval", "db.adminCommand('ping')"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
+
+  # ============================================
+  # SERVICE 2: Backend (FastAPI)
+  # ============================================
+  backend:
+    build:
+      context: ..
+      dockerfile: docker/backend.Dockerfile
+    container_name: grey-backend
+    restart: unless-stopped
+    ports:
+      # Backend API on port 8000 (Matched with Nginx)
+      - "8000:8000"
+    env_file:
+      # Load Google OAuth Client ID/Secret from here
+      - ../sheet/.env
+    environment:
+      - MONGO_URI=mongodb://mongodb:27017/vinh
+      - MONGO_DB=vinh
+      - DOCKER_BACKEND=true
+      - PYTHONUNBUFFERED=1
+      - PORT=8000
+      - WORKSPACE_ROOT=/app
+      - DATA_DIR=/app/data
+      # Grey-specific optimizations
+      - GREY_MAX_WORKERS=4
+      - GREY_FAST_MODE=true
+      - GREY_VECTORIZED=true
+      # Prevent BLAS/OpenMP libraries from oversubscribing CPU (multiprocessing-safe)
+      - OMP_NUM_THREADS=1
+      - MKL_NUM_THREADS=1
+      - OPENBLAS_NUM_THREADS=1
+      - NUMEXPR_NUM_THREADS=1
+    # Resource limits: 4 cores + 5GB for backend (rest reserved for Mongo+frontend)
+    cpuset: "0-3"
+    cpus: "4.0"
+    mem_limit: "5g"
+    mem_reservation: "2g"
+    deploy:
+      resources:
+        limits:
+          memory: 5G
+          cpus: '4.0'
+        reservations:
+          memory: 2G
+          cpus: '1.0'
+    volumes:
+      # Mount the unified project root
+      - ..:/app
+      # Standardized data and result mounts
+      - ../data:/app/data
+    networks:
+      - grey-network
+    depends_on:
+      mongodb:
+        condition: service_healthy
+
+  # ============================================
+  # SERVICE 3: Frontend (Vite React)
+  # ============================================
+  frontend:
+    build:
+      context: ../frontend
+      dockerfile: ../docker/frontend.Dockerfile
+    container_name: grey-frontend
+    restart: unless-stopped
+    ports:
+      # Frontend on port 5720 (Matched with Nginx)
+      - "5720:5720"
+    environment:
+      # ============================================
+      # Backend Connection Configuration
+      # ============================================
+      # Method 1: Direct URL (takes priority in vite.config.js)
+      # Uncomment to force backend URL (for Docker Compose override)
+      # - VITE_API_URL=http://backend:8000
+      
+      # Method 2: Flag-based detection
+      # Signal to vite.config.js that we're running inside Docker container
+      - DOCKER_BACKEND=true
+      - NODE_ENV=production
+    cpuset: "0-3"
+    cpus: "0.5"
+    mem_limit: "500m"
+    mem_reservation: "128m"
+    deploy:
+      resources:
+        limits:
+          memory: 500M
+          cpus: '0.5'
+        reservations:
+          memory: 128M
+          cpus: '0.25'
+    volumes:
+      - ../frontend:/app
+      - /app/node_modules  # Prevent overwriting node_modules
+    networks:
+      - grey-network
+    depends_on:
+      - backend
+
+# ============================================
+# NETWORKS
+# ============================================
+networks:
+  grey-network:
+    driver: bridge
+    name: grey-network
+
+# ============================================
+# VOLUMES (Optional - for named volumes)
+# ============================================
+volumes:
+  mongodb_data:
+    driver: local

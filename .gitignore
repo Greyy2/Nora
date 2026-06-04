@@ -1,0 +1,94 @@
+# Secrets and local environment
+.env
+.env.*
+**/.env
+**/.env.*
+!**/.env.example
+*.pem
+*.key
+*.crt
+*.p12
+*.pfx
+id_rsa*
+.ssh/
+.aws/
+
+# Google Sheets / service credentials
+sheet/*
+!sheet/.env.example
+
+# Dependency and build output
+node_modules/
+frontend/node_modules/
+dist/
+build/
+frontend/dist/
+frontend/build*.log
+frontend/build_pid.txt
+frontend/vite.config.js.timestamp-*
+
+# Runtime data, results, logs, and cache
+data/
+results/
+log/
+logs/
+tmp/
+cache/
+*.log
+*.pkl
+*.pickle
+*.h5
+*.hdf5
+*.parquet
+*.feather
+*.csv
+*.zip
+*.tar
+*.tar.gz
+*.tgz
+
+# Generated experiment artifacts
+alpha/
+backend/engines/data/
+backend/engines/QuantaAlpha/data/
+backend/engines/quanta/data/
+backend/engines/quanta/log/
+backend/engines/quanta/logs/
+backend/engines/quanta/mlruns/
+backend/engines/quanta/pickle_cache/
+backend/engines/quanta/git_ignore_folder/
+backend/engines/quanta/build/
+backend/engines/quanta/*.egg-info/
+backend/engines/quanta/UNKNOWN.egg-info/
+backend/engines/quanta/quantaalpha/log/
+backend/engines/quanta/quantaalpha/factors/factor_template/mlruns/
+backend/engines/quanta/sova_factor_report.html
+backend/report_full.txt
+
+# Python cache and local virtualenvs
+__pycache__/
+**/__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.venv/
+venv/
+
+# Internal reports, notes, and scratch assets
+/baocao/
+/agent/
+/.github/skills/
+frontend/src/pages/About/none/
+*.bak
+*.new
+*.current_backup
+*.docx
+
+# OS / editor noise
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/

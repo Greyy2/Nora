@@ -1,0 +1,263 @@
+/* ============================================
+   GLOBAL DESIGN SYSTEM (From Vinh/Kema)
+   ============================================ */
+
+:root {
+    /* Professional Color Palette */
+    --primary: #6366F1;
+    --primary-light: #818CF8;
+    --primary-dark: #4F46E5;
+    --secondary: #EC4899;
+    --success: #10B981;
+    --warning: #F59E0B;
+    --danger: #EF4444;
+
+    /* Gradient Colors */
+    --gradient-primary: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    --gradient-success: linear-gradient(135deg, #0BA360 0%, #3CBA92 100%);
+    --gradient-trading: linear-gradient(135deg, #4FACFE 0%, #00F2FE 100%);
+    --gradient-optimize: linear-gradient(135deg, #FC466B 0%, #3F5EFB 100%);
+
+    /* Glass Effect */
+    --glass-bg: rgba(255, 255, 255, 0.05);
+    --glass-border: rgba(255, 255, 255, 0.1);
+    --glass-shadow: rgba(0, 0, 0, 0.1);
+
+    /* Spacing & Radius */
+    --radius-sm: 0.5rem;
+    --radius-md: 1rem;
+    --radius-lg: 1.5rem;
+    --radius-xl: 2rem;
+
+    /* Transitions */
+    --transition-base: 0.3s ease;
+
+    /* Default Light Mode Fallbacks (can be overridden by body.dark) */
+    --bg-primary: #fff7d6;
+    --bg-secondary: #fffdf0;
+    --text-primary: #0f172a;
+    --text-secondary: #64748b;
+    --border-color: #e2e8f0;
+    --accent-color: #38bdf8;
+    --login-bg-gradient: linear-gradient(135deg, #fdf2f8 0%, #e0f2fe 100%);
+    --login-panel-bg: rgba(255, 255, 255, 0.7);
+
+    /* Responsive viewport variables */
+    --app-scale: 1;
+    --vh: 100dvh;
+    --vw: 100vw;
+    --container-width: min(1440px, 100vw);
+}
+
+@media (min-width: 1920px) {
+    :root {
+        --container-width: 1600px;
+    }
+}
+
+html {
+    background-color: var(--bg-primary);
+    min-height: 100vh;
+}
+
+html[data-theme='dark'] {
+    background-color: #0b0f19;
+}
+
+html[data-theme='light'] {
+    background-color: #fff7d6;
+}
+
+body {
+    font-family: 'Poppins', -apple-system, BlinkMacSystemFont, sans-serif;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    min-height: 100vh;
+    background-color: var(--bg-primary);
+    margin: 0;
+    padding: 0;
+}
+
+body.dark {
+    /* Vinh's Dark Theme Colors - Enhanced with wave gradients */
+    --bg-primary: #0a0e16;
+    --bg-secondary: #0f1419;
+    --text-primary: #F1F5F9;
+    /* Slate 100 */
+    --text-secondary: #CBD5E1;
+    /* Slate 300 */
+    --border-color: #1e293b;
+    --accent-color: #38bdf8;
+
+    --login-panel-bg: rgba(15, 23, 42, 0.6);
+
+    --chart-bg: #000000;
+    --chart-border: #1e293b;
+}
+
+body.light {
+    --bg-primary: #ffffff;
+    --bg-secondary: #f8fafc;
+    --text-primary: #0f172a;
+    --text-secondary: #475569;
+    --border-color: #e2e8f0;
+    --accent-color: #0284c7;
+
+    --login-panel-bg: rgba(255, 255, 255, 0.7);
+
+    --tv-bg-primary: #fff1f2;
+    --tv-text-primary: #0f172a;
+}
+
+/* Global animated background for dark mode */
+body.dark {
+    background: linear-gradient(135deg,
+            #0a0e16 0%,
+            #0d1520 8%,
+            #0f1a2c 16%,
+            #0d1926 24%,
+            #0e1420 32%,
+            #111827 40%,
+            #0f172a 48%,
+            #0d1520 56%,
+            #0e1624 64%,
+            #0f1825 72%,
+            #0d1622 80%,
+            #0b1218 88%,
+            #0a1018 96%,
+            #0c1420 100%);
+    background-size: 400% 400%;
+    animation: globalDarkWave 25s ease infinite;
+}
+
+/* Global animated background for light mode */
+body.light {
+    background: linear-gradient(135deg,
+            #ffffff 0%,
+            #fefefe 15%,
+            #fafbff 30%,
+            #fff8fa 45%,
+            #f8faff 60%,
+            #fffbfc 75%,
+            #fafeff 90%,
+            #ffffff 100%);
+    background-size: 300% 300%;
+    animation: globalLightWave 30s ease infinite;
+}
+
+@keyframes globalDarkWave {
+    0% {
+        background-position: 0% 50%;
+    }
+
+    20% {
+        background-position: 40% 25%;
+    }
+
+    40% {
+        background-position: 80% 50%;
+    }
+
+    60% {
+        background-position: 100% 75%;
+    }
+
+    80% {
+        background-position: 60% 100%;
+    }
+
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+@keyframes globalLightWave {
+    0% {
+        background-position: 0% 50%;
+    }
+
+    25% {
+        background-position: 50% 0%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    75% {
+        background-position: 50% 100%;
+    }
+
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+/* Buttons */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 1rem 2rem;
+    border-radius: var(--radius-md) !important;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all var(--transition-base);
+    border: none;
+    cursor: pointer;
+    font-size: 1.1rem;
+    line-height: 1.5;
+}
+
+.btn-primary {
+    background: var(--gradient-primary);
+    color: white;
+    box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(99, 102, 241, 0.4);
+    color: white;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+#root {
+    width: 100%;
+    min-height: var(--vh);
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    background-color: transparent;
+    overflow-x: hidden;
+    overflow-y: auto;
+    zoom: 1;
+}
+
+html,
+body {
+    margin: 0;
+    padding: 0;
+    width: 100vw;
+    min-height: 100%;
+    height: auto;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+/* Spinner Animation */
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}

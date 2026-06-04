@@ -1,0 +1,76 @@
+# ============================================
+# DOCKER COMPOSE CHO DỰ ÁN GREY (OLD - PRODUCTION)
+# ============================================
+
+name: grey
+
+services:
+  # MongoDB Database
+  mongodb:
+    image: mongo:6.0
+    container_name: grey-mongodb
+    restart: unless-stopped
+    ports:
+      - "27019:27017"
+    environment:
+      MONGO_INITDB_DATABASE: vinh
+    volumes:
+      - /data/grey/mongodb_data:/data/db
+      - ./mongodb.init.js:/docker-entrypoint-initdb.d/init.js:ro
+    networks:
+      - grey-network
+    healthcheck:
+      test: ["CMD", "mongosh", "--eval", "db.adminCommand('ping')"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
+
+  # Backend (FastAPI)
+  backend:
+    build:
+      context: ..
+      dockerfile: docker/backend.Dockerfile
+    container_name: grey-backend
+    restart: unless-stopped
+    ports:
+      - "8000:8000"
+    env_file:
+      - ../sheet/.env
+    environment:
+      - MONGO_URI=mongodb://mongodb:27017/vinh
+      - PYTHONUNBUFFERED=1
+      - PORT=8000
+    volumes:
+      - ..:/app
+      - ../data:/app/data
+    networks:
+      - grey-network
+    depends_on:
+      mongodb:
+        condition: service_healthy
+
+  # Frontend (Vite React) with polling for file watch
+  frontend:
+    build:
+      context: ../frontend
+      dockerfile: ../docker/frontend.Dockerfile
+    container_name: grey-frontend
+    restart: unless-stopped
+    ports:
+      - "5720:5720"
+    environment:
+      - VITE_API_URL=http://backend:8000
+      - CHOKIDAR_USEPOLLING=true
+    volumes:
+      - ../frontend:/app
+      - /app/node_modules
+    networks:
+      - grey-network
+    depends_on:
+      - backend
+
+networks:
+  grey-network:
+    driver: bridge
+    name: grey-network
