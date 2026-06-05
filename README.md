@@ -111,9 +111,48 @@ Grey dùng bảng kết quả theo tinh thần của QuantaAlpha và RD-Agent: t
 | Backtest filter | Công thức chạy qua backtest | ARR, MDD, Sharpe, Calmar, Profit Factor | Loại công thức yếu hoặc rủi ro quá cao |
 | Simulation candidate | Top formula theo từng regime | Stability, drawdown guardrail, explanation quality | Đưa sang trading mô phỏng và tiếp tục theo dõi |
 
-| Stage | Seed | Regime | Evolve R1 | Backtest | Select | Sim |
-| :--- | ---: | ---: | ---: | ---: | ---: | ---: |
-| Score index | 25 | 42 | 61 | 74 | 86 | 91 |
+<table>
+  <tr>
+    <th align="center">Seed</th>
+    <th align="center">Regime</th>
+    <th align="center">Evolve R1</th>
+    <th align="center">Backtest</th>
+    <th align="center">Select</th>
+    <th align="center">Sim</th>
+  </tr>
+  <tr>
+    <td align="center" width="16%">
+      <strong>25</strong><sub>/100</sub><br />
+      <sub>Idea baseline</sub><br />
+      <code>███░░░░░░░</code>
+    </td>
+    <td align="center" width="16%">
+      <strong>42</strong><sub>/100</sub><br />
+      <sub>Market routing</sub><br />
+      <code>████░░░░░░</code>
+    </td>
+    <td align="center" width="16%">
+      <strong>61</strong><sub>/100</sub><br />
+      <sub>Mutation loop</sub><br />
+      <code>██████░░░░</code>
+    </td>
+    <td align="center" width="16%">
+      <strong>74</strong><sub>/100</sub><br />
+      <sub>Risk filter</sub><br />
+      <code>███████░░░</code>
+    </td>
+    <td align="center" width="16%">
+      <strong>86</strong><sub>/100</sub><br />
+      <sub>Candidate pick</sub><br />
+      <code>█████████░</code>
+    </td>
+    <td align="center" width="16%">
+      <strong>91</strong><sub>/100</sub><br />
+      <sub>Simulation ready</sub><br />
+      <code>█████████░</code>
+    </td>
+  </tr>
+</table>
 
 <p align="center"><em>Score index mô tả độ hoàn thiện của pipeline AI/evolution trong README; metric tài chính thật cần được tái lập từ các campaign local.</em></p>
 
