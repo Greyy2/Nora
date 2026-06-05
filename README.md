@@ -126,7 +126,7 @@ Grey dùng bảng kết quả theo tinh thần của QuantaAlpha và RD-Agent: t
   </tr>
   <tr>
     <td align="center" width="50%">
-      <img src="https://github-readme-stats.vercel.app/api?username=Greyy2&show_icons=true&theme=tokyonight&hide_border=true&rank_icon=github&include_all_commits=true" alt="Greyy2 GitHub readme stats" width="100%" />
+      <img src="https://github-profile-summary-cards.vercel.app/api/cards/most-commit-language?username=Greyy2&theme=tokyonight" alt="Greyy2 most commit language" width="100%" />
     </td>
     <td align="center" width="50%">
       <img src="https://github-profile-summary-cards.vercel.app/api/cards/profile-details?username=Greyy2&theme=tokyonight" alt="Greyy2 profile details" width="100%" />
