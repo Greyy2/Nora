@@ -118,18 +118,18 @@ Grey dùng bảng kết quả theo tinh thần của QuantaAlpha và RD-Agent: t
 <table>
   <tr>
     <td align="center" width="50%">
-      <img src="https://github-profile-summary-cards.vercel.app/api/cards/stats?username=Greyy2&theme=tokyonight" alt="Greyy2 stats summary" width="100%" />
+      <img src="https://github-profile-summary-cards.vercel.app/api/cards/stats?username=Greyy2&theme=tokyonight" alt="Greyy2 stats summary" width="100%" height="220" />
     </td>
     <td align="center" width="50%">
-      <img src="https://github-profile-summary-cards.vercel.app/api/cards/productive-time?username=Greyy2&theme=tokyonight&utcOffset=7" alt="Greyy2 productive time" width="100%" />
+      <img src="https://github-profile-summary-cards.vercel.app/api/cards/productive-time?username=Greyy2&theme=tokyonight&utcOffset=7" alt="Greyy2 productive time" width="100%" height="220" />
     </td>
   </tr>
   <tr>
     <td align="center" width="50%">
-      <img src="https://github-profile-summary-cards.vercel.app/api/cards/most-commit-language?username=Greyy2&theme=tokyonight" alt="Greyy2 most commit language" width="100%" />
+      <img src="https://github-profile-summary-cards.vercel.app/api/cards/most-commit-language?username=Greyy2&theme=tokyonight" alt="Greyy2 most commit language" width="100%" height="220" />
     </td>
     <td align="center" width="50%">
-      <img src="https://github-profile-summary-cards.vercel.app/api/cards/profile-details?username=Greyy2&theme=tokyonight" alt="Greyy2 profile details" width="100%" />
+      <img src="https://github-profile-summary-cards.vercel.app/api/cards/profile-details?username=Greyy2&theme=tokyonight" alt="Greyy2 profile details" width="100%" height="220" />
     </td>
   </tr>
 </table>
