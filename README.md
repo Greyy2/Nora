@@ -111,13 +111,9 @@ Grey dùng bảng kết quả theo tinh thần của QuantaAlpha và RD-Agent: t
 | Backtest filter | Công thức chạy qua backtest | ARR, MDD, Sharpe, Calmar, Profit Factor | Loại công thức yếu hoặc rủi ro quá cao |
 | Simulation candidate | Top formula theo từng regime | Stability, drawdown guardrail, explanation quality | Đưa sang trading mô phỏng và tiếp tục theo dõi |
 
-```mermaid
-xychart-beta
-    title "SOVA Strategy Evolution Score Index"
-    x-axis [Seed, Regime, Evolve_R1, Backtest, Select, Sim]
-    y-axis "Score index" 0 --> 100
-    line [25, 42, 61, 74, 86, 91]
-```
+| Stage | Seed | Regime | Evolve R1 | Backtest | Select | Sim |
+| :--- | ---: | ---: | ---: | ---: | ---: | ---: |
+| Score index | 25 | 42 | 61 | 74 | 86 | 91 |
 
 <p align="center"><em>Score index mô tả độ hoàn thiện của pipeline AI/evolution trong README; metric tài chính thật cần được tái lập từ các campaign local.</em></p>
 
@@ -239,12 +235,11 @@ Grey/
 ├── frontend/         # React/Vite UI source
 ├── docker/           # Dockerfiles and docker-compose
 ├── docs/images/      # README screenshots
-├── nginx/            # Deployment nginx config
 ├── .env.example      # Local config template without secrets
 └── start.sh          # Helper script for local/server startup
 ```
 
-Các thư mục runtime như `data/`, `results/`, `log/`, `tmp/`, `frontend/node_modules/`, `frontend/dist/`, `sheet/` và experiment artifacts không được commit.
+Các thư mục runtime như `data/`, `results/`, `log/`, `tmp/`, `frontend/node_modules/`, `frontend/dist/`, `sheet/`, `nginx/` và experiment artifacts không được commit.
 
 ---
 
@@ -255,6 +250,7 @@ Repo này được chuẩn bị theo nguyên tắc public-safe:
 | Không commit | Lý do |
 | :--- | :--- |
 | `.env`, `.env.local`, `sheet/*.json`, `sheet/.env` | Chứa API key, OAuth secret, token hoặc service account |
+| `nginx/` | Chứa cấu hình triển khai local/domain/server, không phù hợp để đưa lên repo public |
 | `data/`, `results/`, `backend/engines/*/data` | Dữ liệu thị trường và artifact chạy thật |
 | `frontend/node_modules/`, `frontend/dist/` | Dependency/build output có thể tái tạo |
 | `log/`, `tmp/`, `mlruns/`, `cache/`, `*.pkl`, `*.csv` | Runtime logs, model/cache/result files |

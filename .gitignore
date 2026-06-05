@@ -87,6 +87,9 @@ frontend/src/pages/About/none/
 *.current_backup
 *.docx
 
+# Local deployment config
+nginx/
+
 # OS / editor noise
 .DS_Store
 Thumbs.db
