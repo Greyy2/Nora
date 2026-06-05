@@ -111,50 +111,30 @@ Grey dùng bảng kết quả theo tinh thần của QuantaAlpha và RD-Agent: t
 | Backtest filter | Công thức chạy qua backtest | ARR, MDD, Sharpe, Calmar, Profit Factor | Loại công thức yếu hoặc rủi ro quá cao |
 | Simulation candidate | Top formula theo từng regime | Stability, drawdown guardrail, explanation quality | Đưa sang trading mô phỏng và tiếp tục theo dõi |
 
+### Stats
+
+<p>Phần stats dưới đây dùng SVG card endpoint để GitHub README render ổn định, thay cho các block chart beta dễ bị mất hoặc không hiện đúng.</p>
+
 <table>
   <tr>
-    <th align="center">Seed</th>
-    <th align="center">Regime</th>
-    <th align="center">Evolve R1</th>
-    <th align="center">Backtest</th>
-    <th align="center">Select</th>
-    <th align="center">Sim</th>
+    <td align="center" width="50%">
+      <img src="https://github-profile-summary-cards.vercel.app/api/cards/stats?username=Greyy2&theme=tokyonight" alt="Greyy2 stats summary" width="100%" />
+    </td>
+    <td align="center" width="50%">
+      <img src="https://github-profile-summary-cards.vercel.app/api/cards/productive-time?username=Greyy2&theme=tokyonight&utcOffset=7" alt="Greyy2 productive time" width="100%" />
+    </td>
   </tr>
   <tr>
-    <td align="center" width="16%">
-      <strong>25</strong><sub>/100</sub><br />
-      <sub>Idea baseline</sub><br />
-      <code>███░░░░░░░</code>
+    <td align="center" width="50%">
+      <img src="https://github-readme-stats.vercel.app/api?username=Greyy2&show_icons=true&theme=tokyonight&hide_border=true&rank_icon=github&include_all_commits=true" alt="Greyy2 GitHub readme stats" width="100%" />
     </td>
-    <td align="center" width="16%">
-      <strong>42</strong><sub>/100</sub><br />
-      <sub>Market routing</sub><br />
-      <code>████░░░░░░</code>
-    </td>
-    <td align="center" width="16%">
-      <strong>61</strong><sub>/100</sub><br />
-      <sub>Mutation loop</sub><br />
-      <code>██████░░░░</code>
-    </td>
-    <td align="center" width="16%">
-      <strong>74</strong><sub>/100</sub><br />
-      <sub>Risk filter</sub><br />
-      <code>███████░░░</code>
-    </td>
-    <td align="center" width="16%">
-      <strong>86</strong><sub>/100</sub><br />
-      <sub>Candidate pick</sub><br />
-      <code>█████████░</code>
-    </td>
-    <td align="center" width="16%">
-      <strong>91</strong><sub>/100</sub><br />
-      <sub>Simulation ready</sub><br />
-      <code>█████████░</code>
+    <td align="center" width="50%">
+      <img src="https://github-profile-summary-cards.vercel.app/api/cards/profile-details?username=Greyy2&theme=tokyonight" alt="Greyy2 profile details" width="100%" />
     </td>
   </tr>
 </table>
 
-<p align="center"><em>Score index mô tả độ hoàn thiện của pipeline AI/evolution trong README; metric tài chính thật cần được tái lập từ các campaign local.</em></p>
+<p align="center"><em>UTC offset đang đặt là `+7` để khớp múi giờ làm việc của bạn; nếu cần mình có thể đổi theme hoặc bố cục để sát ảnh mẫu hơn nữa.</em></p>
 
 ---
 
