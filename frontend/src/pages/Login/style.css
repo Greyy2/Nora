@@ -1,0 +1,825 @@
+/* Login Page Styles */
+
+.login-page-wrapper {
+    min-height: var(--vh);
+    width: 100%;
+    position: relative;
+    background: var(--login-bg-gradient);
+    color: var(--text-primary);
+    overflow: hidden;
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Light mode - white dominant background for LOGIN PAGE ONLY */
+.login-page-wrapper.light {
+    background: linear-gradient(135deg,
+            #ffffff 0%,
+            #fefefe 20%,
+            #fafbff 40%,
+            #fff8fa 60%,
+            #f8faff 80%,
+            #ffffff 100%);
+}
+
+/* Dark mode animated gradient background - balanced with warm and cool tones */
+.login-page-wrapper.dark {
+    background: linear-gradient(135deg,
+            #0a0e16 0%,
+            /* Deep navy */
+            #0d1520 8%,
+            /* Dark slate */
+            #0f1a2c 16%,
+            /* Midnight blue */
+            #0d1926 24%,
+            /* Deep ocean */
+            #0e1420 32%,
+            /* Dark navy */
+            #111827 40%,
+            /* Charcoal */
+            #0f172a 48%,
+            /* Slate navy */
+            #0d1520 56%,
+            /* Dark slate */
+            #0e1624 64%,
+            /* Navy blue */
+            #0f1825 72%,
+            /* Deep slate */
+            #0d1622 80%,
+            /* Ocean navy */
+            #0b1218 88%,
+            /* Near black */
+            #0a1018 96%,
+            /* Deep black */
+            #0c1420 100%
+            /* Navy black */
+        );
+    background-size: 400% 400%;
+    animation: darkWaveGradient 25s ease infinite;
+}
+
+/* Dark mode wave gradient animation - smooth and elegant */
+@keyframes darkWaveGradient {
+    0% {
+        background-position: 0% 50%;
+    }
+
+    20% {
+        background-position: 40% 25%;
+    }
+
+    40% {
+        background-position: 80% 50%;
+    }
+
+    60% {
+        background-position: 100% 75%;
+    }
+
+    80% {
+        background-position: 60% 100%;
+    }
+
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+.login-split-container {
+    display: flex;
+    width: 100%;
+    min-height: var(--vh);
+    flex: 1;
+    overflow-y: auto;
+}
+
+/* --- Back to Home Button --- */
+.back-to-home-btn {
+    position: absolute;
+    top: 20px;
+    left: 30px;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--text-secondary);
+    text-decoration: none;
+    font-size: 1rem;
+    font-weight: 500;
+    z-index: 100;
+    transition: all 0.3s ease;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(5px);
+}
+
+.back-to-home-btn i {
+    font-size: 1.1rem;
+    transition: transform 0.3s ease;
+}
+
+.back-to-home-btn:hover {
+    color: var(--text-primary);
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.2);
+    transform: translateX(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.back-to-home-btn:hover i {
+    transform: translateX(-3px);
+}
+
+/* Light Mode Override for Back Button */
+.login-page-wrapper.light .back-to-home-btn {
+    color: #1e293b;
+    background: rgba(0, 0, 0, 0.05);
+    border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.login-page-wrapper.light .back-to-home-btn:hover {
+    color: #000;
+    background: rgba(0, 0, 0, 0.1);
+    border-color: rgba(0, 0, 0, 0.2);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* --- Theme Toggle --- */
+.login-theme-toggle-btn {
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    background: transparent;
+    border: none;
+    color: var(--text-secondary);
+    font-size: 1.5rem;
+    cursor: pointer;
+    z-index: 100;
+    transition: color 0.3s;
+}
+
+.login-theme-toggle-btn:hover {
+    color: var(--text-primary);
+    transform: rotate(15deg);
+}
+
+/* --- Left Panel --- */
+.login-left-panel {
+    flex: 1;
+    background: transparent;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    /* Lean to the left as requested */
+    padding: 6rem 4rem 6rem min(10vw, 10rem);
+    /* Refined indentation for balance */
+    /* Dynamic indentation for balance */
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+}
+
+.branding-content {
+    width: 90%;
+    max-width: 540px;
+    /* Constrain width to keep it centered and professional */
+}
+
+.brand-title {
+    font-size: 3.5rem;
+    font-weight: 700;
+    line-height: 1.1;
+    margin-bottom: 3rem;
+    background: linear-gradient(to right, #60a5fa, #38bdf8);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.brand-highlight {
+    color: #fff;
+    -webkit-text-fill-color: #fff;
+}
+
+.feature-list {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.feature-item {
+    display: flex;
+    gap: 15px;
+    align-items: flex-start;
+}
+
+.feature-bullet {
+    color: var(--accent-color);
+    font-size: 1.5rem;
+    line-height: 1;
+}
+
+.feature-text h3 {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 0.25rem;
+    color: #e2e8f0;
+    /* Always light text on dark gradient side */
+}
+
+.feature-text p {
+    font-size: 0.95rem;
+    color: #94a3b8;
+    margin: 0;
+}
+
+/* Light/Dark visibility adjustments */
+body.light .wave-1,
+body.light .wave-2 {
+    opacity: 1;
+}
+
+/* Light mode text color fixes */
+body.light .brand-title {
+    background: linear-gradient(to right, #0284c7, #0ea5e9);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+body.light .brand-highlight {
+    color: #0f172a;
+    -webkit-text-fill-color: #0f172a;
+}
+
+body.light .feature-text h3 {
+    color: #0f172a;
+}
+
+body.light .feature-text p {
+    color: #475569;
+}
+
+/* Feature Bullets */
+.feature-bullet {
+    display: flex;
+    align-items: flex-start;
+    padding-top: 4px;
+    margin-right: 0.5rem;
+}
+
+.bullet-circle {
+    display: block;
+    width: 12px;
+    height: 12px;
+    background: var(--accent-color);
+    border-radius: 50%;
+    margin-top: 6px;
+    box-shadow: 0 0 10px rgba(56, 189, 248, 0.4);
+}
+
+.login-right-panel {
+    flex: 1;
+    background: transparent;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* Independent centering */
+    position: relative;
+    z-index: 1;
+}
+
+/* Animated Divider Line between panels - Restored for clear separation */
+.login-right-panel::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 10%;
+    height: 80%;
+    width: 1px;
+    background: linear-gradient(180deg,
+            transparent 0%,
+            rgba(99, 102, 241, 0.15) 15%,
+            rgba(168, 85, 247, 0.2) 30%,
+            rgba(236, 72, 153, 0.25) 50%,
+            rgba(168, 85, 247, 0.2) 70%,
+            rgba(99, 102, 241, 0.15) 85%,
+            transparent 100%);
+    background-size: 100% 200%;
+    opacity: 0.5;
+    animation: dividerWave 4s ease-in-out infinite;
+}
+
+@keyframes dividerWave {
+
+    0%,
+    100% {
+        background-position: 0% 0%;
+    }
+
+    50% {
+        background-position: 0% 100%;
+    }
+}
+
+/* Dark Mode Deeper Tone */
+body.dark .login-right-panel {
+    background: linear-gradient(to left, rgba(0, 0, 0, 0.65), rgba(0, 0, 0, 0.35));
+}
+
+body.dark .login-right-panel::before {
+    background: linear-gradient(180deg,
+            transparent 0%,
+            rgba(99, 102, 241, 0.15) 12%,
+            rgba(236, 72, 153, 0.25) 25%,
+            rgba(168, 85, 247, 0.2) 37%,
+            rgba(56, 189, 248, 0.28) 50%,
+            rgba(168, 85, 247, 0.2) 63%,
+            rgba(236, 72, 153, 0.22) 75%,
+            rgba(99, 102, 241, 0.15) 88%,
+            transparent 100%);
+    background-size: 100% 200%;
+    opacity: 0.4;
+    box-shadow: none;
+}
+
+/* Light Mode Deeper Tone (Subtle Muted Shade) */
+body.light .login-right-panel {
+    background: linear-gradient(to left, rgba(0, 0, 0, 0.08), rgba(0, 0, 0, 0.04));
+    /* Increased contrast for "trầm" effect */
+}
+
+body.light .login-right-panel::before {
+    background: linear-gradient(180deg,
+            transparent 0%,
+            rgba(59, 130, 246, 0.1) 15%,
+            rgba(139, 92, 246, 0.15) 30%,
+            rgba(236, 72, 153, 0.2) 50%,
+            rgba(139, 92, 246, 0.15) 70%,
+            rgba(59, 130, 246, 0.1) 85%,
+            transparent 100%);
+    background-size: 100% 200%;
+    opacity: 0.45;
+    /* Boosted for better visibility in light mode */
+    box-shadow: none;
+}
+
+.login-form-container {
+    width: 100%;
+    max-width: 420px;
+    padding: 2rem;
+}
+
+.form-header {
+    margin-bottom: 3rem;
+}
+
+.form-header h2 {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    color: var(--text-primary);
+}
+
+.form-header p {
+    color: var(--text-secondary);
+}
+
+/* --- Form Styles --- */
+.input-group-modern {
+    margin-bottom: 1.5rem;
+    width: 100%;
+    /* Ensure full width */
+}
+
+.input-group-modern label {
+    display: block;
+    font-size: 0.9rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    color: var(--text-primary);
+}
+
+.input-wrapper {
+    position: relative;
+    width: 100%;
+    /* Ensure full width */
+}
+
+.input-wrapper input {
+    display: block !important;
+    /* Force block display aggressive */
+    width: 100% !important;
+    /* Force full width aggressive */
+    min-width: 100% !important;
+    /* Ensure it cannot be smaller */
+    box-sizing: border-box !important;
+    /* Ensure padding is included */
+    /* Start with 14px to match button height exactly */
+    padding: 14px 16px;
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    color: var(--text-primary);
+    font-size: 1rem;
+    transition: all 0.2s;
+    box-sizing: border-box;
+    /* Force border-box to match button behavior */
+}
+
+.input-wrapper input:focus {
+    outline: none;
+    border-color: var(--accent-color);
+    box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.2);
+}
+
+.password-toggle-icon {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    color: var(--text-secondary);
+    cursor: pointer;
+    font-size: 1.2rem;
+}
+
+.btn-modern-submit {
+    width: 100%;
+    padding: 14px;
+    background: linear-gradient(90deg, #38bdf8, #2563eb);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+    margin-top: 1rem;
+}
+
+.btn-modern-submit:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(37, 99, 235, 0.4);
+}
+
+.btn-modern-submit:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+    transform: none;
+}
+
+/* Status Messages */
+.status-message {
+    padding: 10px;
+    border-radius: 6px;
+    margin-bottom: 1rem;
+    font-size: 0.9rem;
+}
+
+.status-message.error {
+    background: rgba(239, 68, 68, 0.1);
+    color: #ef4444;
+    border: 1px solid rgba(239, 68, 68, 0.2);
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+    .login-split-container {
+        flex-direction: column;
+        min-height: auto;
+        /* Allow height to grow naturally */
+    }
+
+    .login-left-panel,
+    .login-right-panel {
+        min-height: auto;
+        flex: none;
+        background: transparent !important;
+        /* Force transparent for seamless BG */
+    }
+
+    .login-left-panel {
+        padding: 4rem 2rem 2rem;
+        align-items: center;
+        text-align: center;
+    }
+
+    .login-right-panel {
+        padding: 2rem 2rem 4rem;
+    }
+
+    .login-right-panel::before {
+        display: none;
+        /* Hide divider line */
+    }
+
+    .brand-title {
+        font-size: 2.8rem;
+        margin-bottom: 2rem;
+    }
+
+    .feature-list {
+        display: none;
+        /* Hide features on small height/width to focus on login */
+    }
+
+    .login-form-container {
+        max-width: 450px;
+        margin: 0 auto;
+    }
+}
+
+/* ====================== PREMIUM WAVE ORBS BACKGROUND ====================== */
+.hero-background {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    min-height: var(--vh);
+    z-index: 0;
+    overflow: hidden;
+    pointer-events: none;
+}
+
+.gradient-orb {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(120px);
+    opacity: 0.5;
+    animation: floatWave 25s infinite ease-in-out;
+    will-change: transform;
+}
+
+/* Dark Mode Orbs - Balanced warm-cool harmony (Blue, Magenta, Cyan, Purple, Gold) */
+/* Orb 1: Deep Blue - Top Left */
+.login-page-wrapper.dark .orb-1 {
+    width: 700px;
+    height: 700px;
+    background: radial-gradient(circle, rgba(59, 130, 246, 0.45) 0%, rgba(37, 99, 235, 0.28) 40%, rgba(30, 64, 175, 0.15) 60%, transparent 75%);
+    top: -180px;
+    left: -130px;
+    animation: floatWave 28s infinite ease-in-out, orbColorShift1 12s infinite ease-in-out;
+}
+
+/* Orb 2: Magenta/Pink - Bottom Right (WARM ACCENT) */
+.login-page-wrapper.dark .orb-2 {
+    width: 750px;
+    height: 750px;
+    background: radial-gradient(circle, rgba(236, 72, 153, 0.38) 0%, rgba(219, 39, 119, 0.22) 40%, rgba(190, 24, 93, 0.1) 60%, transparent 75%);
+    bottom: -180px;
+    right: -130px;
+    animation: floatWave 32s infinite ease-in-out, orbColorShift2 15s infinite ease-in-out;
+    animation-delay: 3s;
+}
+
+/* Orb 3: Cyan - Center */
+.login-page-wrapper.dark .orb-3 {
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, rgba(34, 211, 238, 0.38) 0%, rgba(6, 182, 212, 0.22) 40%, rgba(8, 145, 178, 0.12) 60%, transparent 75%);
+    top: 50%;
+    left: 40%;
+    transform: translate(-50%, -50%);
+    animation: floatWave 25s infinite ease-in-out, orbColorShift3 10s infinite ease-in-out;
+    animation-delay: 6s;
+}
+
+/* Orb 4: Purple - Top Right */
+.login-page-wrapper.dark .orb-4 {
+    width: 500px;
+    height: 500px;
+    background: radial-gradient(circle, rgba(168, 85, 247, 0.38) 0%, rgba(139, 92, 246, 0.22) 40%, rgba(91, 33, 182, 0.12) 60%, transparent 75%);
+    top: 15%;
+    right: 15%;
+    animation: floatWave 30s infinite ease-in-out, orbColorShift1 14s infinite ease-in-out;
+    animation-delay: 9s;
+}
+
+/* Orb 5: Gold/Amber - Bottom Left (WARM ACCENT) */
+.login-page-wrapper.dark .orb-5 {
+    width: 550px;
+    height: 550px;
+    background: radial-gradient(circle, rgba(251, 191, 36, 0.32) 0%, rgba(217, 119, 6, 0.18) 40%, rgba(180, 83, 9, 0.08) 60%, transparent 75%);
+    bottom: 15%;
+    left: 5%;
+    animation: floatWave 26s infinite ease-in-out, orbColorShift2 11s infinite ease-in-out;
+    animation-delay: 12s;
+}
+
+/* Wave color shift animations for dark mode - harmonious transitions */
+@keyframes orbColorShift1 {
+
+    0%,
+    100% {
+        filter: blur(120px) hue-rotate(0deg);
+        opacity: 0.5;
+    }
+
+    33% {
+        filter: blur(130px) hue-rotate(15deg);
+        opacity: 0.6;
+    }
+
+    66% {
+        filter: blur(115px) hue-rotate(-10deg);
+        opacity: 0.45;
+    }
+}
+
+@keyframes orbColorShift2 {
+
+    0%,
+    100% {
+        filter: blur(120px) hue-rotate(0deg);
+        opacity: 0.5;
+    }
+
+    50% {
+        filter: blur(125px) hue-rotate(-20deg);
+        opacity: 0.55;
+    }
+}
+
+@keyframes orbColorShift3 {
+
+    0%,
+    100% {
+        filter: blur(120px) hue-rotate(0deg);
+        opacity: 0.5;
+    }
+
+    25% {
+        filter: blur(115px) hue-rotate(10deg);
+        opacity: 0.55;
+    }
+
+    75% {
+        filter: blur(130px) hue-rotate(-15deg);
+        opacity: 0.45;
+    }
+}
+
+/* Light Mode Orbs - Subtle accents on white background */
+.login-page-wrapper.light .gradient-orb {
+    opacity: 0.18;
+    filter: blur(140px);
+}
+
+/* Orb 1: Soft Sky Blue */
+.login-page-wrapper.light .orb-1 {
+    background: radial-gradient(circle, #93c5fd 0%, #dbeafe 40%, transparent 70%);
+}
+
+/* Orb 2: Very Soft Pink */
+.login-page-wrapper.light .orb-2 {
+    background: radial-gradient(circle, #fecdd3 0%, #fff1f2 40%, transparent 70%);
+}
+
+/* Orb 3: Soft Lavender */
+.login-page-wrapper.light .orb-3 {
+    background: radial-gradient(circle, #c4b5fd 0%, #ede9fe 40%, transparent 70%);
+}
+
+/* Orb 4: Soft Cyan */
+.login-page-wrapper.light .orb-4 {
+    background: radial-gradient(circle, #67e8f9 0%, #ecfeff 40%, transparent 70%);
+}
+
+/* Orb 5: Soft Peach */
+.login-page-wrapper.light .orb-5 {
+    background: radial-gradient(circle, #fed7aa 0%, #fff7ed 40%, transparent 70%);
+}
+
+@keyframes floatWave {
+
+    0%,
+    100% {
+        transform: translate(0, 0) scale(1) rotate(0deg);
+    }
+
+    20% {
+        transform: translate(50px, -80px) scale(1.1) rotate(45deg);
+    }
+
+    40% {
+        transform: translate(-60px, 60px) scale(0.9) rotate(-30deg);
+    }
+
+    60% {
+        transform: translate(80px, 40px) scale(1.05) rotate(60deg);
+    }
+
+    80% {
+        transform: translate(-40px, -70px) scale(0.95) rotate(-45deg);
+    }
+}
+
+/* Color wave animation for orbs */
+@keyframes colorWave {
+
+    0%,
+    100% {
+        filter: blur(100px) hue-rotate(0deg);
+    }
+
+    25% {
+        filter: blur(110px) hue-rotate(30deg);
+    }
+
+    50% {
+        filter: blur(90px) hue-rotate(60deg);
+    }
+
+    75% {
+        filter: blur(105px) hue-rotate(30deg);
+    }
+}
+
+/* Apply color wave to orbs - Smoother in dark mode */
+.login-page-wrapper.dark .gradient-orb {
+    animation: floatWave 30s infinite ease-in-out, colorWave 20s infinite ease-in-out;
+}
+
+.login-page-wrapper.light .gradient-orb {
+    animation: floatWave 25s infinite ease-in-out, colorWave 20s infinite ease-in-out;
+}
+
+/* Pulse glow effect - Softer for dark mode */
+@keyframes pulseGlow {
+
+    0%,
+    100% {
+        opacity: 0.5;
+        transform: scale(1);
+    }
+
+    50% {
+        opacity: 0.7;
+        transform: scale(1.03);
+    }
+}
+
+.login-page-wrapper.dark .orb-1 {
+    animation: floatWave 25s infinite ease-in-out, pulseGlow 8s infinite ease-in-out;
+    animation-delay: 0s, 0s;
+}
+
+.login-page-wrapper.dark .orb-2 {
+    animation: floatWave 28s infinite ease-in-out, pulseGlow 10s infinite ease-in-out;
+    animation-delay: 8s, 2s;
+}
+
+.login-page-wrapper.dark .orb-3 {
+    animation: floatWave 22s infinite ease-in-out, pulseGlow 7s infinite ease-in-out;
+    animation-delay: 16s, 4s;
+}
+
+.login-page-wrapper.dark .orb-4 {
+    animation: floatWave 30s infinite ease-in-out, pulseGlow 9s infinite ease-in-out;
+    animation-delay: 4s, 1s;
+}
+
+.login-page-wrapper.dark .orb-5 {
+    animation: floatWave 26s infinite ease-in-out, pulseGlow 11s infinite ease-in-out;
+    animation-delay: 12s, 3s;
+}
+
+/* Light mode with color shift */
+.login-page-wrapper.light .orb-1 {
+    animation: floatWave 25s infinite ease-in-out, colorWave 18s infinite ease-in-out;
+    animation-delay: 0s, 0s;
+}
+
+.login-page-wrapper.light .orb-2 {
+    animation: floatWave 28s infinite ease-in-out, colorWave 22s infinite ease-in-out;
+    animation-delay: 8s, 3s;
+}
+
+.login-page-wrapper.light .orb-3 {
+    animation: floatWave 22s infinite ease-in-out, colorWave 16s infinite ease-in-out;
+    animation-delay: 16s, 6s;
+}
+
+.login-page-wrapper.light .orb-4 {
+    animation: floatWave 30s infinite ease-in-out, colorWave 20s infinite ease-in-out;
+    animation-delay: 4s, 2s;
+}
+
+.login-page-wrapper.light .orb-5 {
+    animation: floatWave 26s infinite ease-in-out, colorWave 24s infinite ease-in-out;
+    animation-delay: 12s, 5s;
+}
+
+/* Responsive fixes */
+@media (max-width: 900px) {
+    .gradient-orb {
+        width: 300px !important;
+        height: 300px !important;
+        filter: blur(60px);
+    }
+}
